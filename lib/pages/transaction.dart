@@ -5,14 +5,13 @@ import 'package:login_signup/database/database_helper.dart';
 // import 'package:login_signup/database/model.dart';
 
 class TransactionScreen extends StatefulWidget {
-  final DatabaseHelper dbHelper; // Add this line
+  final DatabaseHelper dbHelper;
 
   TransactionScreen({Key? key, required this.dbHelper}) : super(key: key);
   
   @override
   _TransactionScreenState createState() => _TransactionScreenState();
 }
-
 
 class _TransactionScreenState extends State<TransactionScreen> {
   List<Transaction> transactions = [];
@@ -43,7 +42,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transactions'),
+        title: Row(
+          children: [
+            Icon(Icons.business_center_rounded),
+            SizedBox(width: 8), // Add some space between icon and text
+            Text('Transactions'),
+          ],
+        ),
       ),
       body: transactions.isEmpty
           ? Center(child: Text('No Transactions'))
