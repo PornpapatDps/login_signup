@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_signup/pages/signup.dart';
 import '../database/auth.dart';
 import '../database/database_helper.dart';
 import 'transaction.dart';
@@ -18,63 +19,68 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final Color primaryColor = const Color(0xFF1E88E5); // สีฟ้าสว่าง
   final Color secondaryColor = const Color(0xFF1565C0); // สีกรมท่าเข้ม
-  final Color backgroundColor = const Color(0xFF1C2833); // พื้นหลังโทนกรมท่าไล่สีเข้มไปอ่อน
-  final Color cardStartColor = const Color(0xFF0A2342); // ไล่สีการ์ดเริ่มต้น (เข้ม)
+  final Color backgroundColor =
+      const Color(0xFF1C2833); // พื้นหลังโทนกรมท่าไล่สีเข้มไปอ่อน
+  final Color cardStartColor =
+      const Color(0xFF0A2342); // ไล่สีการ์ดเริ่มต้น (เข้ม)
   final Color cardEndColor = const Color(0xFF1E3A5F); // ไล่สีการ์ด (อ่อนกว่า)
 
   Future _showAlert(BuildContext context, String message) {
-  return showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        contentPadding: EdgeInsets.zero, // ใช้เป็น 0 เพื่อให้ใช้ได้ทั้ง Container
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(18.0)),
-        ),
-        content: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0A2342), Color(0xFF1E3A5F)], // ไล่สีการ์ดใน Alert
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding:
+              EdgeInsets.zero, // ใช้เป็น 0 เพื่อให้ใช้ได้ทั้ง Container
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(18.0)),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min, // ขนาดของ Alert ใหญ่ตามเนื้อหา
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  message,
-                  style: const TextStyle(fontSize: 16, color: Colors.white),
-                ),
-                const SizedBox(height: 20.0),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1E88E5),
-                    ),
-                    child: const Text(
-                      'Close',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+          content: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF0A2342),
+                  Color(0xFF1E3A5F)
+                ], // ไล่สีการ์ดใน Alert
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(18.0)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min, // ขนาดของ Alert ใหญ่ตามเนื้อหา
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    message,
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 20.0),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1E88E5),
+                      ),
+                      child: const Text(
+                        'Close',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    },
-  );
-}
-
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +88,10 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1C2833), Color(0xFF2C3E50)], // ไล่สีพื้นหลัง กรมท่าเข้มไปอ่อน
+            colors: [
+              Color(0xFF1C2833),
+              Color(0xFF2C3E50)
+            ], // ไล่สีพื้นหลัง กรมท่าเข้มไปอ่อน
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -127,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8.0),
                   const Text(
-                    'Login to your account',
+                    'เข้าสู่ระบบ บัญชีของคุณ',
                     style: TextStyle(
                       fontSize: 22,
                       color: Colors.white70,
@@ -135,8 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 30.0),
                   _buildTextField(
-                    label: 'Email Address',
-                    hint: 'Enter your email',
+                    label: 'Email ',
+                    hint: 'Enter your Email ',
                     isPassword: false,
                     icon: Icons.email,
                     onChanged: (value) => _email = value,
@@ -173,13 +182,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                     _passwd = '';
                                   });
                                 } else {
-                                  _showAlert(context,
-                                      'Invalid login credentials!');
+                                  _showAlert(
+                                      context, 'ข้อมูลการเข้าสู่ระบบไม่ถูกต้อง');
+                                      
                                 }
-                              });
+                              }
+                              );
                             },
                             child: const Text(
-                              "LOGIN",
+                              "เข้าสู่ระบบ",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
@@ -189,19 +200,29 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                  // const SizedBox(height: 20.0),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     // Add Forgot Password Logic
-                  //   },
-                  //   child: const Text(
-                  //     "Forgot your password?",
-                  //     style: TextStyle(
-                  //       color: Colors.white70,
-                  //       decoration: TextDecoration.underline,
-                  //     ),
-                  //   ),
-                  // ),
+                  const SizedBox(height: 20.0),
+                  Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  SignUpScreen(), // นำทางไปยังหน้าสมัครสมาชิก
+                            ));
+                          },
+                          child: const Text(
+                            "ยังไม่มีบัญชี ลงทะเบียน",
+                            style: TextStyle(
+                              color: Colors.white70,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -228,6 +249,7 @@ class _LoginScreenState extends State<LoginScreen> {
         const SizedBox(height: 8.0),
         TextFormField(
           onChanged: onChanged,
+          style: const TextStyle(color: Colors.white), // Set text color to white
           decoration: InputDecoration(
             prefixIcon: Icon(icon, color: Colors.white),
             filled: true,
@@ -246,44 +268,44 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildPasswordField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Password',
-          style: TextStyle(color: Colors.white),
-        ),
-        const SizedBox(height: 8.0),
-        TextFormField(
-          obscureText: !_isPasswordVisible,
-          onChanged: (value) => _passwd = value,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.lock, color: Colors.white),
-            suffixIcon: IconButton(
-              icon: Icon(
-                _isPasswordVisible
-                    ? Icons.visibility
-                    : Icons.visibility_off,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                setState(() {
-                  _isPasswordVisible = !_isPasswordVisible;
-                });
-              },
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'Password',
+        style: TextStyle(color: Colors.white),
+      ),
+      const SizedBox(height: 8.0),
+      TextFormField(
+        obscureText: !_isPasswordVisible,
+        onChanged: (value) => _passwd = value,
+        style: const TextStyle(color: Colors.white), // Set text color to white
+        decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.lock, color: Colors.white),
+          suffixIcon: IconButton(
+            icon: Icon(
+              _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+              color: Colors.white,
             ),
-            filled: true,
-            fillColor: Colors.white.withOpacity(0.1),
-            contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
-            hintText: "Enter your password",
-            hintStyle: const TextStyle(color: Colors.white54),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
-              borderSide: BorderSide.none,
-            ),
+            onPressed: () {
+              setState(() {
+                _isPasswordVisible = !_isPasswordVisible;
+              });
+            },
+          ),
+          filled: true,
+          fillColor: Colors.white.withOpacity(0.1),
+          contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
+          hintText: "Enter your password",
+          hintStyle: const TextStyle(color: Colors.white54),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: BorderSide.none,
           ),
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
+}
+
 }
