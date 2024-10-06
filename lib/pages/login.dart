@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         backgroundColor: const Color(0xFF1E88E5),
                       ),
                       child: const Text(
-                        'Close',
+                        'ปิด',
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
